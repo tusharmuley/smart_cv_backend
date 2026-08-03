@@ -1,18 +1,5 @@
-# from pydantic import BaseSettings
-
-
-# class Settings(BaseSettings):
-#     app_name: str = "Smart CV Backend"
-#     api_v1_str: str = "/api/v1"
-#     debug: bool = True
-#     database_url: str = "sqlite:///./smart_cv.db"
-
-#     class Config:
-#         env_file = ".env"
-
-
-# settings = Settings()
-
+﻿from typing import List
+from pydantic import Field
 from pydantic_settings import BaseSettings
 
 
@@ -23,11 +10,20 @@ class Settings(BaseSettings):
 
     HOST: str
     PORT: int
+    ALLOW_ORIGINS: str = Field(default="")
 
     GOOGLE_API_KEY: str = ""
 
-    class Config:
-        env_file = ".env"
+    model_config = {
+        "env_file": ".env",
+        "case_sensitive": True,
+    }
+
+    @property
+    def allow_origins(self) -> List[str]:
+        if not self.ALLOW_ORIGINS:
+            return []
+        return [origin.strip() for origin in self.ALLOW_ORIGINS.split(",") if origin.strip()]
 
 
 settings = Settings()
