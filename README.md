@@ -1,6 +1,9 @@
 # Smart CV Backend
 
+> 🚀 **Live Demo →** [https://smart-cv-frontend-seven.vercel.app/](https://smart-cv-frontend-seven.vercel.app/)
+
 This backend follows a clean FastAPI project structure.
+
 
 ## Project layout
 
